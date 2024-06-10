@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.task.mapper.TaskMapper">
+    <select id="getSysTaskList" resultType="com.nebula.task.domain.SysTask">
+        select * from sys_task
+        <where>
+            <if test="id !=null">and id =#{ id }</if>
+            <if test="createTime !=null">and create_time =#{ createTime }</if>
+            <if test="updateTime !=null">and update_time =#{ updateTime }</if>
+            <if test="jobName !=null and jobName !=''">and job_name =#{ jobName }</if>
+            <if test="jobHandler !=null and jobHandler !=''">and job_handler =#{ jobHandler }</if>
+            <if test="cron !=null and cron !=''">and cron =#{ cron }</if>
+            <if test="jobDesc !=null and jobDesc !=''">and job_desc =#{jobDesc}</if>
+            <if test="createBy !=null">and create_by =#{ createBy }</if>
+            <if test="updateBy !=null">and update_by =#{ updateBy }</if>
+            <if test="isOpen !=null">and is_open = #{isOpen}</if>
+            <if test="jobList!=null and jobList.size()>0">
+                and job_handler in
+                <foreach collection="jobList" item="job" open="(" separator="," close=")">
+                    #{job}
+                </foreach>
+            </if>
+            and is_deleted = 0
+        </where>
+    </select>
+</mapper>

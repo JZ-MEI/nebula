@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysMenuMapper">
+
+    <select id="getMenuList" resultType="com.nebula.service.domain.system.SysMenu">
+        select * from sys_menu where is_deleted =0 and is_visiable = 1
+    </select>
+    <select id="getPageBreadcrumb" resultType="com.nebula.service.domain.system.SysMenu">
+        WITH RECURSIVE Path AS (
+            SELECT t1.menu_name,t1.parent_id,t1.router_path
+            FROM sys_menu t1
+            WHERE t1.router_path = #{routerPath}
+            UNION ALL
+            SELECT t2.menu_name,t2.parent_id,t2.router_path
+            FROM sys_menu t2
+                     JOIN Path t3 ON t2.id = t3.parent_id
+        )
+        SELECT t4.*
+        FROM Path t4 order by t4.parent_id;
+    </select>
+    <select id="getRouterData" resultType="com.nebula.service.domain.system.SysMenu">
+        select *
+        from sys_menu
+        where COALESCE(router_path, '') != ''
+          and COALESCE(comp_path, '') != ''
+    </select>
+    <select id="getMenuTableData" resultType="com.nebula.service.domain.system.SysMenu">
+        select * from sys_menu
+        <where>
+            <if test ="createTime != null"> and create_time = #{ createTime } </if>
+            <if test ="updateTime != null"> and update_time = #{ updateTime } </if>
+            <if test ="menuName != null and menuName != ''"> and menu_name = #{ menuName } </if>
+            <if test ="menuType != null"> and menu_type = #{ menuType } </if>
+            <if test ="menuIcon != null and menuIcon != ''"> and menu_icon = #{ menuIcon } </if>
+            <if test ="parentId != null"> and parent_id = #{ parentId } </if>
+            <if test ="routerPath != null and routerPath != ''"> and router_path = #{ routerPath } </if>
+            <if test ="compPath != null and compPath != ''"> and comp_path = #{ compPath } </if>
+            <if test ="orderNo != null"> and order_no = #{ orderNo } </if>
+            <if test ="isCache != null"> and is_cache = #{ isCache } </if>
+            <if test ="isThird != null"> and is_third = #{ isThird } </if>
+            <if test ="isDeleted != null"> and is_deleted = #{ isDeleted } </if>
+            <if test ="isVisiable != null"> and is_visiable = #{ isVisiable } </if>
+            <if test ="permission != null and permission != ''"> and permission = #{ permission } </if>
+            <if test ="createBy != null"> and create_by = #{ createBy } </if>
+            <if test ="updateBy != null"> and update_by = #{ updateBy } </if>
+        </where>
+    </select>
+    <select id="getMenuInfo" resultType="com.nebula.service.domain.system.SysMenu">
+        select * from sys_menu
+        <where>
+            <if test ="createTime != null"> and create_time = #{ createTime } </if>
+            <if test ="updateTime != null"> and update_time = #{ updateTime } </if>
+            <if test ="menuName != null and menuName != ''"> and menu_name = #{ menuName } </if>
+            <if test ="menuType != null"> and menu_type = #{ menuType } </if>
+            <if test ="menuIcon != null and menuIcon != ''"> and menu_icon = #{ menuIcon } </if>
+            <if test ="parentId != null"> and parent_id = #{ parentId } </if>
+            <if test ="routerPath != null and routerPath != ''"> and router_path = #{ routerPath } </if>
+            <if test ="compPath != null and compPath != ''"> and comp_path = #{ compPath } </if>
+            <if test ="orderNo != null"> and order_no = #{ orderNo } </if>
+            <if test ="isCache != null"> and is_cache = #{ isCache } </if>
+            <if test ="isThird != null"> and is_third = #{ isThird } </if>
+            <if test ="isDeleted != null"> and is_deleted = #{ isDeleted } </if>
+            <if test ="isVisiable != null"> and is_visiable = #{ isVisiable } </if>
+            <if test ="permission != null and permission != ''"> and permission = #{ permission } </if>
+            <if test ="createBy != null"> and create_by = #{ createBy } </if>
+            <if test ="updateBy != null"> and update_by = #{ updateBy } </if>
+        </where>
+    </select>
+</mapper>

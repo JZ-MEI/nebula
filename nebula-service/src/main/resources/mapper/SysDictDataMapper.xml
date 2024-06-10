@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysDictDataMapper">
+
+
+    <select id="getSysDictData" resultType="com.nebula.service.domain.system.SysDictData">
+        select * from sys_dict_data
+        <where>
+            <if test="id !=null">id = #{id}</if>
+            <if test="createTime !=null">create_time = #{createTime}</if>
+            <if test="updateTime !=null">update_time = #{updateTime}</if>
+            <if test="typeId !=null">type_id = #{typeId}</if>
+            <if test="dictKey !=null and dictKey !=''">dict_key = #{dictKey}</if>
+            <if test="dictValue !=null and dictValue !=''">dict_value = #{dictValue}</if>
+            <if test="useTag !=null">use_tag = #{useTag}</if>
+            <if test="tagType !=null and tagType !=''">tag_type = #{tagType}</if>
+            <if test="createBy !=null">create_by = #{createBy}</if>
+            <if test="updateBy !=null">update_by = #{updateBy}</if>
+            <if test="remark !=null and remark !=''">remark = #{remark}</if>
+            and is_deleted = 0
+        </where>
+    </select>
+
+    <update id="deleteDictDataByTypeId">
+        update sys_dict_data
+        set is_deleted = 1
+        where type_id = #{typeId}
+    </update>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysDictTypeMapper">
+
+    <select id="getSysDictType" resultType="com.nebula.service.domain.system.SysDictType">
+        select * from sys_dict_type
+        <where>
+            <if test="createTime!= null">and create_time=#{createTime}</if>
+            <if test="updateTime!= null">and update_time=#{updateTime}</if>
+            <if test="dictName!= null and dictName!=''">and dict_name=#{dictName}</if>
+            <if test="dictType!= null and dictType!=''">and dict_type=#{dictType}</if>
+            <if test="createBy!= null">and create_by=#{createBy}</if>
+            <if test="updateBy!= null">and update_by=#{updateBy}</if>
+            <if test="remark!= null and remark!=''">and remark=#{remark}</if>
+            and is_deleted=0
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysRoleMapper">
+
+    <select id="getRoleList" resultType="com.nebula.service.domain.system.SysRole">
+        select * from sys_role
+        <where>
+            <if test="id!=null and id!=''">and id=#{id}</if>
+            <if test="roleName!=null and roleName!=''">and role_name=#{roleName}</if>
+            <if test="roleKey!=null and roleKey!=''">and role_key=#{roleKey}</if>
+            <if test="orderNo!=null">and order_no=#{orderNo}</if>
+            <if test="roleStatus!=null">and role_status=#{roleStatus}</if>
+            <if test="createBy!=null">and create_by=#{createBy}</if>
+            <if test="createTime!=null">and create_time=#{createTime}</if>
+            <if test="updateBy!=null">and update_by=#{updateBy}</if>
+            <if test="updateTime!=null">and update_time=#{updateTime}</if>
+            and is_deleted=0
+        </where>
+    </select>
+</mapper>

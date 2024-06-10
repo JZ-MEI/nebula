@@ -1,0 +1,17 @@
+<template>
+    <template v-for="item in options">
+        <template v-if="values===item.dictKey">
+            <span v-if="item.useTag === 0">{{ item.dictValue }}</span>
+            <lay-tag v-else-if="item.useTag===1" :type="item.tagType"  variant="light">{{ item.dictValue }}</lay-tag>
+        </template>
+    </template>
+</template>
+<script>
+export default {
+    name: "DictTag",
+    props: {
+        options: Object,
+        values: Number
+    }
+}
+</script>

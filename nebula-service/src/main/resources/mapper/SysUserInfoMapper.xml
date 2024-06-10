@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysUserInfoMapper">
+
+    <select id="getUserInfoByUsername" resultType="com.nebula.service.domain.system.SysUserInfo">
+        select *
+        from sys_user_info
+        where username = #{username}
+    </select>
+    <select id="getSysUserInfo" resultType="com.nebula.service.domain.system.SysUserInfo">
+        select id,
+        create_time,
+        update_time,
+        username,
+        nickname,
+        avatar,
+        user_sex,
+        user_telephone,
+        user_email,
+        user_status,
+        is_deleted,
+        create_by,
+        update_by
+        from sys_user_info
+        <where>
+            <if test="id!=null">and id =#{ id }</if>
+            <if test="createTime!=null">and create_time =#{ createTime }</if>
+            <if test="updateTime!=null">and update_time =#{ updateTime }</if>
+            <if test="username!=null and username!= '' ">and username =#{ username }</if>
+            <if test="nickname!=null and nickname!= '' ">and nickname =#{ nickname }</if>
+            <if test="avatar!=null and avatar!= '' ">and avatar =#{ avatar }</if>
+            <if test="userSex!=null">and user_sex =#{ userSex }</if>
+            <if test="userTelephone!=null and userTelephone!= '' ">and user_telephone =#{ userTelephone }</if>
+            <if test="userEmail!=null and userEmail!= '' ">and user_email =#{ userEmail }</if>
+            <if test="userStatus!=null">and user_status =#{ userStatus }</if>
+            <if test="createBy!=null">and create_by =#{ createBy }</if>
+            <if test="updateBy!=null">and update_by =#{ updateBy }</if>
+            and is_deleted = 0
+        </where>
+    </select>
+</mapper>
