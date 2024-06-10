@@ -11,6 +11,7 @@
   "dependencies": {
     "@layui/layui-vue": "^2.15.2",
     "axios": "^1.6.7",
+    "echarts": "^5.5.0",
     "js-cookie": "^3.0.5",
     "vue": "^3.3.11",
     "vue-cropper": "^0.6.5",
