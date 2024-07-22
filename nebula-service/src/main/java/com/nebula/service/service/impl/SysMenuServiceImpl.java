@@ -1,9 +1,13 @@
 package com.nebula.service.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.nebula.common.util.AdminUtil;
+import com.nebula.service.config.StpUserRoleConfig;
 import com.nebula.service.domain.system.SysMenu;
 import com.nebula.service.mapper.SysMenuMapper;
 import com.nebula.service.service.SysMenuService;
+import com.nebula.service.service.SysRoleUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
     SysMenuMapper sysMenuMapper;
+    @Autowired
+    SysRoleUserService sysRoleUserService;
 
     private static final Integer SUPER_PARENT_ID = 0;
 
@@ -70,5 +76,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public SysMenu getMenuInfo(SysMenu sysMenu) {
         return sysMenuMapper.getMenuInfo(sysMenu);
+    }
+
+
+    @Override
+    public List<String> getAllMenuPermission() {
+        return sysMenuMapper.getAllMenuPermission();
     }
 }

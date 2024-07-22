@@ -3,8 +3,8 @@
         <lay-form :model="queryParam" :pane="true" size="sm">
             <lay-row space="10">
                 <lay-col md="6">
-                    <lay-form-item label="菜单名称" prop="menuName">
-                        <lay-input v-model="queryParam.menuName" placeholder="请选择菜单名称"></lay-input>
+                    <lay-form-item label="菜单名称" prop="menuTitle">
+                        <lay-input v-model="queryParam.menuTitle" placeholder="请选择菜单名称"></lay-input>
                     </lay-form-item>
                 </lay-col>
                 <lay-col md="6">
@@ -71,8 +71,13 @@
                             </lay-form-item>
                         </lay-col>
                         <lay-col md="12" sm="24">
-                            <lay-form-item label="菜单名称" prop="menuName">
+                            <lay-form-item label="组件名称" prop="menuTitle">
                                 <lay-input v-model="createParam.menuName"></lay-input>
+                            </lay-form-item>
+                        </lay-col>
+                        <lay-col md="12" sm="24">
+                            <lay-form-item label="菜单名称" prop="menuTitle">
+                                <lay-input v-model="createParam.menuTitle"></lay-input>
                             </lay-form-item>
                         </lay-col>
                         <lay-col md="12" sm="24">
@@ -153,6 +158,7 @@ import DictTag from "@/component/DictTag.vue";
 
 
 export default {
+    name:'sysMenu',
     dicts: ["menu_type", "yes_or_no"],
     components: {DictTag},
     setup() {
@@ -160,9 +166,10 @@ export default {
         const checkValue = 1
         let createParam = ref({
             parentId: null,
-            menuName: null,
+            menuTitle: null,
             menuIcon: "layui-icon-home",
             menuType: null,
+            menuName:null,
             permission: null,
             routerPath: null,
             compPath: null,
@@ -175,13 +182,13 @@ export default {
 
         const rowsTotal = ref(0)
         const replaceFields = ref({
-            title: "menuName",
+            title: "menuTitle",
             children: "sysMenuList"
 
         })
 
         const queryParam = ref({
-            menuName: null,
+            menuTitle: null,
             menuType: null,
             isVisiable: null,
             pageNum: 1,
@@ -200,7 +207,7 @@ export default {
         }
 
         const columns = [
-            {title: "菜单名称", key: "menuName"},
+            {title: "菜单名称", key: "menuTitle"},
             {title: "菜单图标", key: "menuIcon", customSlot: "menuIcon", align: 'center'},
             {title: "菜单类型", key: "menuType", align: 'center', customSlot: 'dictType'},
             {title: "权限标识", key: "permission", align: 'center'},
@@ -218,7 +225,9 @@ export default {
 
         function resetParams() {
             for (let key in queryParam.value) {
-                queryParam.value[key] = null;
+                if (key !== "pageNum" && key !== "pageSize") {
+                    queryParam.value[key] = null;
+                }
             }
         }
 
@@ -285,7 +294,7 @@ export default {
         }
 
         function handleDelete(row) {
-            const confirmText = row.sysMenuList ? `确定要删除${row.menuName}及其下属子菜单吗?` : `确定要删除${row.menuName}吗?`
+            const confirmText = row.sysMenuList ? `确定要删除${row.menuTitle}及其下属子菜单吗?` : `确定要删除${row.menuTitle}吗?`
             layer.confirm(confirmText,
                 {
                     btn: [

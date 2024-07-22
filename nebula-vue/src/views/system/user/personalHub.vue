@@ -69,6 +69,7 @@ import {layer} from "@layui/layui-vue";
 
 export default {
     dicts: ["default_sex"],
+    name:'personalHub',
     setup() {
         const userInfo = ref({
             username: "",

@@ -22,5 +22,5 @@ public interface SysMenuService {
 
     SysMenu getMenuInfo(SysMenu sysMenu);
 
-
+    List<String> getAllMenuPermission();
 }

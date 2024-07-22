@@ -61,6 +61,7 @@ import {getUserTableData} from "@/api/sysUser.js";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'roleDetail',
     setup() {
 
         const route = useRoute()

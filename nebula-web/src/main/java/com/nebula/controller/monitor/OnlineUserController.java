@@ -1,6 +1,7 @@
 package com.nebula.controller.monitor;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpStatus;
 import com.nebula.common.common.BaseResult;
 import com.nebula.common.entity.TableDataInfo;
@@ -22,7 +23,7 @@ public class OnlineUserController extends BaseController {
     @GetMapping("getOnlineUser")
     public BaseResult<TableDataInfo<OnlineUser>> getOnlionUser(OnlineUser onlineUser){
         List<OnlineUser> onlineUserList = onlineUserService.getOnlineUserList(onlineUser);
-        List<String> allSession = StpUtil.searchSessionId(onlineUser.getToken(), 0, -1, false);
+        List<String> allSession = StpUtil.searchSessionId(StrUtil.nullToDefault(onlineUser.getToken(),""), 0, -1, false);
         int total = allSession.size();
         TableDataInfo<OnlineUser> tableDataInfo = new TableDataInfo<>();
         tableDataInfo.setRows(onlineUserList);

@@ -58,6 +58,18 @@
             <artifactId>sa-token-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cloud.tianai.captcha</groupId>
             <artifactId>tianai-captcha-springboot-starter</artifactId>
         </dependency>

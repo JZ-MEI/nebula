@@ -1,6 +1,8 @@
 package com.nebula.framework.config;
 
 import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotPermissionException;
+import cn.hutool.core.util.StrUtil;
 import com.nebula.common.common.BaseResult;
 import com.nebula.framework.exception.LoginException;
 import com.nebula.framework.exception.PermissionException;
@@ -25,5 +27,10 @@ public class GlobalExceptionConfig {
     @ExceptionHandler(PermissionException.class)
     public BaseResult<?> handlePermissionException(PermissionException e){
         return BaseResult.error(e.getErrorMsg());
+    }
+
+    @ExceptionHandler(NotPermissionException.class)
+    public BaseResult<?> handleNotPermissionException(NotPermissionException e){
+        return BaseResult.error("当前操作没有权限");
     }
 }

@@ -27,22 +27,38 @@
     <select id="getMenuTableData" resultType="com.nebula.service.domain.system.SysMenu">
         select * from sys_menu
         <where>
-            <if test ="createTime != null"> and create_time = #{ createTime } </if>
-            <if test ="updateTime != null"> and update_time = #{ updateTime } </if>
-            <if test ="menuName != null and menuName != ''"> and menu_name = #{ menuName } </if>
-            <if test ="menuType != null"> and menu_type = #{ menuType } </if>
-            <if test ="menuIcon != null and menuIcon != ''"> and menu_icon = #{ menuIcon } </if>
-            <if test ="parentId != null"> and parent_id = #{ parentId } </if>
-            <if test ="routerPath != null and routerPath != ''"> and router_path = #{ routerPath } </if>
-            <if test ="compPath != null and compPath != ''"> and comp_path = #{ compPath } </if>
-            <if test ="orderNo != null"> and order_no = #{ orderNo } </if>
-            <if test ="isCache != null"> and is_cache = #{ isCache } </if>
-            <if test ="isThird != null"> and is_third = #{ isThird } </if>
-            <if test ="isDeleted != null"> and is_deleted = #{ isDeleted } </if>
-            <if test ="isVisiable != null"> and is_visiable = #{ isVisiable } </if>
-            <if test ="permission != null and permission != ''"> and permission = #{ permission } </if>
-            <if test ="createBy != null"> and create_by = #{ createBy } </if>
-            <if test ="updateBy != null"> and update_by = #{ updateBy } </if>
+            <if test="createTime != null">and create_time = #{ createTime }</if>
+            <if test="updateTime != null">and update_time = #{ updateTime }</if>
+            <if test="menuName != null and menuName != ''">and menu_name = #{ menuName }</if>
+            <if test="menuType != null">and menu_type = #{ menuType }</if>
+            <if test="menuIcon != null and menuIcon != ''">and menu_icon = #{ menuIcon }</if>
+            <if test="parentId != null">and parent_id = #{ parentId }</if>
+            <if test="routerPath != null and routerPath != ''">and router_path = #{ routerPath }</if>
+            <if test="compPath != null and compPath != ''">and comp_path = #{ compPath }</if>
+            <if test="orderNo != null">and order_no = #{ orderNo }</if>
+            <if test="isCache != null">and is_cache = #{ isCache }</if>
+            <if test="isThird != null">and is_third = #{ isThird }</if>
+            <if test="isDeleted != null">and is_deleted = #{ isDeleted }</if>
+            <if test="isVisiable != null">and is_visiable = #{ isVisiable }</if>
+            <if test="permission != null and permission != ''">and permission = #{ permission }</if>
+            <if test="createBy != null">and create_by = #{ createBy }</if>
+            <if test="updateBy != null">and update_by = #{ updateBy }</if>
+            <if test="permissionList != null and permissionList.size() > 0">
+                and (permission IN
+                <foreach item="permission" collection="permissionList" open="(" separator="," close=")">
+                    #{permission}
+                </foreach>
+                or permission is null)
+            </if>
+            <if test="(permissionList == null or permissionList.size()==0) and permission == null">
+                and permission is null
+            </if>
+            <if test="typeList != null and typeList.size() >0">
+                and menu_type in
+                <foreach item="type" collection="typeList" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
         </where>
     </select>
     <select id="getMenuInfo" resultType="com.nebula.service.domain.system.SysMenu">
@@ -65,5 +81,9 @@
             <if test ="createBy != null"> and create_by = #{ createBy } </if>
             <if test ="updateBy != null"> and update_by = #{ updateBy } </if>
         </where>
+    </select>
+
+    <select id="getAllMenuPermission" resultType="java.lang.String">
+        select distinct permission from sys_menu
     </select>
 </mapper>

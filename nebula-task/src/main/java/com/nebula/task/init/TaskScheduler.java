@@ -32,6 +32,7 @@ public class TaskScheduler {
             Map<String,Object> map = new HashMap<>();
             map.put("method", method);
             map.put("instance", instance);
+            map.put("jobId",task.getId());
             if (StrUtil.isNotBlank(task.getJobParams())){
                 map.put("jobParams",task.getJobParams());
             }

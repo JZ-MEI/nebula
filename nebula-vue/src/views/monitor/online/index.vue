@@ -30,6 +30,7 @@ import {getOnlineUser, offline} from "@/api/onlineUser.js";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'onlineUser',
     setup() {
         const queryParam = ref({
             token: null,

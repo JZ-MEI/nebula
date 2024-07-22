@@ -30,6 +30,8 @@
                 </lay-dropdown-menu>
             </template>
         </lay-dropdown>
+        <lay-icon type="layui-icon-screen-full" size="24px" style="float: right;margin-right: 15px" v-if="!isFullScreen" @click="handleFullScreen"/>
+        <lay-icon type="layui-icon-screen-restore" size="24px" style="float: right;margin-right: 15px" v-else @click="handleFullScreen"/>
         <lay-layer v-model="showDraw" type="drawer" title="主题设置">
             <div class="view-container">
                 <lay-form :labelWidth="90">
@@ -125,6 +127,28 @@ export default {
             })
         }
 
+        function handleFullScreen(){
+            if (!document.fullscreenElement && !isFullScreen.value) {
+                // 进入全屏
+                document.documentElement.requestFullscreen().then(() => {
+                    isFullScreen.value = true;
+                });
+            } else {
+                // 退出全屏
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().then(() => {
+                        isFullScreen.value = false;
+                    });
+                }
+            }
+        }
+
+        const isFullScreen = ref(false);
+
+        document.addEventListener('fullscreenchange', () => {
+            isFullScreen.value = !!document.fullscreenElement;
+        });
+
         function toPersonalHub() {
             currentRouter.push("/personal/info")
         }
@@ -206,7 +230,9 @@ export default {
             menuStyleScheme,
             themeVariable,
             borderRadius,
-            resetScheme
+            resetScheme,
+            handleFullScreen,
+            isFullScreen
         }
     }
 

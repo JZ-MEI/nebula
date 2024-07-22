@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.task.mapper.SysJobLogMapper">
+
+    <select id="getSysJobLogs" resultType="com.nebula.task.domain.SysJobLog">
+        select * from sys_job_log
+        <where>
+            <if test="startTime != null and startTime != ''">
+                and execute_time >= #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and end_time &lt;= #{endTime}
+            </if>
+            <if test="dispatchResult != null">
+                and dispatch_result = #{dispatchResult}
+            </if>
+            <if test="executeResult != null">
+                and execute_result = #{executeResult}
+            </if>
+            <if test="jobId != null">
+                and job_id = #{jobId}
+            </if>
+        </where>
+        order by execute_time desc
+    </select>
+</mapper>

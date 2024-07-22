@@ -94,6 +94,7 @@ import {getDict} from "@/util/dict.js";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'dictDetail',
     dicts: ["yes_or_no"],
     components: {DictTag},
     setup() {

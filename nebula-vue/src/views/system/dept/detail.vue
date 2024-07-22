@@ -75,6 +75,7 @@ import DictTag from "@/component/DictTag.vue";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'deptDetail',
     components: {DictTag},
     setup() {
         const route = useRoute()

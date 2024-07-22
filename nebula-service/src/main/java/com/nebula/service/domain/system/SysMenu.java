@@ -24,6 +24,8 @@ public class SysMenu extends PageDomain {
 
     private String menuName;
 
+    private String menuTitle;
+
     private Integer menuType;
 
     private String menuIcon;
@@ -52,4 +54,10 @@ public class SysMenu extends PageDomain {
 
     @TableField(exist = false)
     private List<SysMenu> sysMenuList;
+
+    @TableField(exist = false)
+    private List<String> permissionList;
+
+    @TableField(exist = false)
+    private List<Integer> typeList;
 }

@@ -88,6 +88,7 @@ import {layer} from "@layui/layui-vue";
 import {getNormalUser} from "@/api/sysUser.js";
 
 export default {
+    name:'sysDept',
     setup() {
         const queryParam = ref({
             deptName: null,

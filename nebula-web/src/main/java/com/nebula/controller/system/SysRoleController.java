@@ -2,6 +2,7 @@ package com.nebula.controller.system;
 
 import com.nebula.common.common.BaseResult;
 import com.nebula.common.entity.TableDataInfo;
+import com.nebula.common.util.AdminUtil;
 import com.nebula.common.util.BaseController;
 import com.nebula.common.util.PageUtil;
 import com.nebula.service.domain.system.SysRole;
@@ -60,5 +61,13 @@ public class SysRoleController extends BaseController {
     @PostMapping("createOrDeleteRoleUser")
     public BaseResult<?> createOrDeleteRoleUser(@RequestBody SysRoleUser sysRoleUser){
         return toResult(sysRoleUserService.createOrDeleteRoleUser(sysRoleUser));
+    }
+
+
+    @GetMapping("getUserRoleList")
+    public BaseResult<List<String>> getUserRoleList(){
+        Integer loginId = AdminUtil.getLoginId();
+        List<String> userRoleList = sysRoleUserService.getUserRoleList(loginId);
+        return BaseResult.success(userRoleList);
     }
 }

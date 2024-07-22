@@ -67,6 +67,7 @@ import {onMounted} from "vue";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'sysDict',
     setup() {
         const queryParam = ref({
             dictName: null,

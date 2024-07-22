@@ -2,6 +2,7 @@ package com.nebula.service.service.impl;
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.StrUtil;
 import com.nebula.service.domain.monitor.OnlineUser;
 import com.nebula.service.domain.system.SysUserInfo;
 import com.nebula.service.service.OnlineUserService;
@@ -22,7 +23,7 @@ public class OnlineUserServiceImpl implements OnlineUserService {
     @Override
     public List<OnlineUser> getOnlineUserList(OnlineUser onlineUser) {
         int start = (onlineUser.getPageNum()-1) * onlineUser.getPageSize();
-        List<String> sessionIdList = StpUtil.searchSessionId(onlineUser.getToken(), start, onlineUser.getPageSize(), false);
+        List<String> sessionIdList = StpUtil.searchSessionId(StrUtil.nullToDefault(onlineUser.getToken(),""), start, onlineUser.getPageSize(), false);
 
         List<OnlineUser> onlineUserList = new ArrayList<>();
         for (String sessionId:sessionIdList){

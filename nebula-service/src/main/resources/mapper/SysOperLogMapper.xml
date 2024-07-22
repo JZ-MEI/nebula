@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.SysOperLogMapper">
+
+    <select id="getSysOperLog" resultType="com.nebula.service.domain.monitor.SysOperLog">
+        select t1.oper_time, t1.sql_id, t1.command_type, t1.sql_param, t2.nickname
+        from sys_oper_log t1
+        left join sys_user_info t2 on t1.user_id = t2.id
+        <where>
+            <if test="nickname != null and nickname != ''">
+                and t2.nickname = #{nickname}
+            </if>
+            <if test="userId != null">
+                and t1.user_id = #{userId}
+            </if>
+            <if test="commandType != null and commandType != ''">
+                and t1.command_type = #{commandType}
+            </if>
+            <if test="sqlId != null and sqlId != ''">
+                and t1.sql_id like concat('%',#{sqlId},'%')
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and oper_time >= #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and oper_time &lt;= #{endTime}
+            </if>
+        </where>
+        order by oper_time desc
+    </select>
+</mapper>

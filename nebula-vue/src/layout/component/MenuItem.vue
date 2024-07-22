@@ -6,7 +6,7 @@
             </template>
             <template #title>
                 <span @click="openItem(item)">
-                {{ item.menuName }}
+                {{ item.menuTitle }}
                 </span>
             </template>
         </lay-menu-item>
@@ -15,7 +15,7 @@
                 <lay-icon :type="item.menuIcon"></lay-icon>
             </template>
             <template #title>
-                {{ item.menuName }}
+                {{ item.menuTitle }}
             </template>
             <menu-item :sys-menu="item.sysMenuList" @current-tab="openTab"/>
         </lay-sub-menu>
@@ -35,15 +35,20 @@ export default {
         const router = useRouter()
 
         function openItem(item) {
-            emit("current-tab", item)
-            router.push(item.routerPath)
-            if (item.routerPath === "/index"){
-                emit("breadcrumb",[{menuName:'主页',routerPath:'/index'}])
-            }else {
-                let param = {routerPath: item.routerPath}
-                getPageBreadcrumb(param).then(res => {
-                    emit("breadcrumb", res.data)
-                })
+            console.log(item)
+            if (item.isThird===0) {
+                emit("current-tab", item)
+                router.push(item.routerPath)
+                if (item.routerPath === "/index") {
+                    emit("breadcrumb", [{menuTitle: '主页', routerPath: '/index'}])
+                } else {
+                    let param = {routerPath: item.routerPath}
+                    getPageBreadcrumb(param).then(res => {
+                        emit("breadcrumb", res.data)
+                    })
+                }
+            }else{
+                window.open(item.routerPath,'_blank')
             }
         }
         function openTab(item){

@@ -26,8 +26,9 @@ const dynamicRoutes = [
         children: [
             {
                 path: '/system/dict/detail/:dictId(\\d+)',
-                name:'字典详情',
-                component: () => import('../views/system/dict/detail.vue')
+                name:'dictDetail',
+                component: () => import('../views/system/dict/detail.vue'),
+                meta:{menuTitle:'字典详情',keepAlive: false}
             }
         ]
     },
@@ -37,8 +38,9 @@ const dynamicRoutes = [
         children: [
             {
                 path: '/system/dept/detail/:deptId(\\d+)',
-                name:'部门详情',
-                component: () => import('../views/system/dept/detail.vue')
+                name:'deptDetail',
+                component: () => import('../views/system/dept/detail.vue'),
+                meta:{menuTitle:'部门详情',keepAlive: false}
             }
         ]
     },
@@ -48,8 +50,9 @@ const dynamicRoutes = [
         children: [
             {
                 path:'/system/role/detail/:roleId(\\d+)',
-                name:'角色用户',
-                component:()=>import('../views/system/role/detail.vue')
+                name:'roleDetail',
+                component:()=>import('../views/system/role/detail.vue'),
+                meta:{menuTitle:'角色用户',keepAlive: false}
             }
         ]
     },
@@ -59,8 +62,21 @@ const dynamicRoutes = [
         children: [
             {
                 path:'/personal/:page(\\w+)',
-                name:'个人中心',
-                component:()=>import('../views/system/user/personalHub.vue')
+                name:'personalHub',
+                component:()=>import('../views/system/user/personalHub.vue'),
+                meta:{keepAlive:false,menuTitle: '个人中心'}
+            }
+        ]
+    },
+    {
+        path:"/",
+        component: Layout,
+        children: [
+            {
+                path:'/monitor/task/detail/:taskId(\\d+)',
+                name:'execLog',
+                component:()=>import('../views/monitor/task/detail.vue'),
+                meta:{menuTitle: '调度日志',keepAlive: false}
             }
         ]
     }
@@ -94,7 +110,8 @@ async function getAllRouter() {
                         path: item.routerPath,
                         name: item.menuName,
                         id:item.id,
-                        component: () => import(/* @vite-ignore */ `../views${item.compPath}`)
+                        component: () => import(/* @vite-ignore */ `../views${item.compPath}`),
+                        meta:{menuTitle:item.menuTitle,keepAlive:item.isCache===1}
                     }
                 ]
             })

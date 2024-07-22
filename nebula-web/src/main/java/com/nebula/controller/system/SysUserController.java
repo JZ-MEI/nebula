@@ -1,7 +1,9 @@
 package com.nebula.controller.system;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.nebula.common.common.BaseResult;
 import com.nebula.common.entity.TableDataInfo;
+import com.nebula.common.util.AdminUtil;
 import com.nebula.common.util.BaseController;
 import com.nebula.common.util.PageUtil;
 import com.nebula.service.domain.system.SysUserInfo;
@@ -26,10 +28,12 @@ public class SysUserController extends BaseController {
 
     }
 
+    @SaCheckPermission("user.add")
     @PostMapping("createOrEditUserInfo")
     public BaseResult<?> createOrEditUserInfo(@RequestBody SysUserInfo sysUserInfo) {
         return toResult(sysUserInfoService.createOrEditUserInfo(sysUserInfo));
     }
+
 
     @PostMapping("modifyPwd")
     public BaseResult<?> modifyPwd(@RequestBody SysUserInfo sysUserInfo) {

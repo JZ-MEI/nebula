@@ -5,8 +5,9 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nebula.common.util.AdminUtil;
+import com.nebula.common.annotation.SqlLog;
 import com.nebula.task.annotation.NebulaJob;
+import com.nebula.common.util.AdminUtil;
 import com.nebula.service.mapper.SysTaskMapper;
 import com.nebula.service.service.SysTaskService;
 import com.nebula.task.domain.SysTask;
@@ -31,6 +32,7 @@ public class SysTaskServiceImpl implements SysTaskService {
     SysTaskMapper sysTaskMapper;
     @Autowired
     private ApplicationContext applicationContext;
+
 
     @Override
     public List<SysTask> getTaskList(SysTask sysTask) {

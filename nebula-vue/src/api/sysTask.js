@@ -23,3 +23,11 @@ export function createOrEditTask(data){
         data:data
     })
 }
+
+export function getDetailTableData(param){
+    return request({
+        url:'/task/getDetail',
+        method:'get',
+        params:param
+    })
+}

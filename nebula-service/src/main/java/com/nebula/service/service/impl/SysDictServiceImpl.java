@@ -1,5 +1,6 @@
 package com.nebula.service.service.impl;
 
+import com.nebula.common.annotation.SqlLog;
 import com.nebula.common.util.AdminUtil;
 import com.nebula.service.domain.system.SysDictData;
 import com.nebula.service.domain.system.SysDictType;
@@ -54,6 +55,7 @@ public class SysDictServiceImpl implements SysDictService {
         return 1;
     }
 
+    @SqlLog
     @Override
     public int createOrEditDictType(SysDictType sysDictType) {
         if (sysDictType.getId()!=null){

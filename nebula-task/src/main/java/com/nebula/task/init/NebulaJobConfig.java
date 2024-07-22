@@ -3,8 +3,8 @@ package com.nebula.task.init;
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nebula.task.annotation.NebulaJob;
 
+import com.nebula.task.annotation.NebulaJob;
 import com.nebula.task.domain.SysTask;
 import com.nebula.task.domain.TaskDomain;
 import com.nebula.task.service.TaskService;
@@ -50,7 +50,7 @@ public class NebulaJobConfig {
         taskScheduler.initTask(dbJobInfo);
     }
 
-    private List<TaskDomain> getDbJobInfo(List<Method> methodList){
+    private List<TaskDomain> getDbJobInfo(List<Method> methodList) {
         List<String> jobList = methodList.stream().map(i -> AnnotationUtil.getAnnotation(i, NebulaJob.class).jobName()).collect(Collectors.toList());
         SysTask sysTask = new SysTask();
         sysTask.setJobList(jobList);
@@ -60,8 +60,11 @@ public class NebulaJobConfig {
         List<TaskDomain> sysJobHandlerList = new ArrayList<>();
         for (SysTask task : taskList) {
             TaskDomain taskDomain = new TaskDomain();
-            BeanUtil.copyProperties(task,taskDomain);
-            Method method = methodList.stream().filter(i -> StrUtil.equals(AnnotationUtil.getAnnotation(i, NebulaJob.class).jobName(), task.getJobHandler())).findFirst().get();
+            BeanUtil.copyProperties(task, taskDomain);
+            Method method = methodList.stream().filter(i -> {
+                boolean equals = StrUtil.equals(AnnotationUtil.getAnnotation(i, NebulaJob.class).jobName(), task.getJobHandler());
+                return equals;
+            }).findFirst().get();
             taskDomain.setMethod(method);
             sysJobHandlerList.add(taskDomain);
         }

@@ -25,6 +25,11 @@
             <template v-slot:toolbar>
                 <lay-button type="primary" @click="handleCreate" size="sm">新增</lay-button>
             </template>
+            <template v-slot:jobHandler="{row}">
+                <router-link :to=genDetailUrl(row) class="table-link">
+                    {{row.jobHandler}}
+                </router-link>
+            </template>
             <template v-slot:isOpen="{row}">
                 <lay-switch v-model="row.isOpen" :unswitch-value=0 unswitch-text="停用" :onswitch-value=1
                             onswitch-text="正常" @change="switchChange(row)"></lay-switch>
@@ -87,6 +92,7 @@ import {layer} from "@layui/layui-vue";
 import {changeDeptStatus, createOrUpdateDept} from "@/api/sysDept.js";
 
 export default {
+    name:'sysJob',
     setup() {
         const queryParam = ref({
             jobName: null,
@@ -97,7 +103,7 @@ export default {
 
         const columns = [
             {title: "任务名称", key: "jobName",align: 'center'},
-            {title: "执行器", key: "jobHandler", align: 'center'},
+            {title: "执行器", key: "jobHandler", align: 'center',customSlot: 'jobHandler'},
             {title: "CRON", key: "cron", align: 'center'},
             {title: "运行参数",key: "jobParams",align: 'center'},
             {title: "运行状态", key: "isOpen", align: 'center', customSlot: 'isOpen'},
@@ -162,6 +168,10 @@ export default {
         function changePage(item) {
             queryParam.value.pageNum = item.current
             handleQuery()
+        }
+
+        const genDetailUrl = (row)=>{
+            return "/monitor/task/detail/"+row.id;
         }
 
         function handleQuery(){
@@ -261,7 +271,8 @@ export default {
             switchChange,
             handleCreate,
             handleEdit,
-            handleDelete
+            handleDelete,
+            genDetailUrl
         }
     }
 }

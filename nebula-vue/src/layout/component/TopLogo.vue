@@ -33,7 +33,7 @@ export default {
     height: 36px;
     width: 36px;
     //margin-top: 7px;
-    background-image: url("@/assets/img/vite.png");
+    background-image: url("@/assets/img/favicon.ico");
     //display: inline-block;
     background-size: cover;
 }

@@ -47,3 +47,10 @@ export function createOrDeleteRoleUser(data){
         data:data
     })
 }
+
+export function getUserRoleList(){
+    return request({
+        url:'sysRole/getUserRoleList',
+        method:'get'
+    })
+}

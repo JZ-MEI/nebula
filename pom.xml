@@ -28,6 +28,8 @@
         <aop.version>2.5.15</aop.version>
         <oshi.version>6.4.8</oshi.version>
         <quartz.version>2.3.2</quartz.version>
+        <common-pool.version>2.11.1</common-pool.version>
+        <velocity.version>2.3</velocity.version>
     </properties>
 
     <dependencyManagement>
@@ -52,6 +54,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -94,6 +97,16 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${common-pool.version}</version>
             </dependency>
             <dependency>
                 <groupId>cloud.tianai.captcha</groupId>
@@ -144,6 +157,11 @@
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
                 <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

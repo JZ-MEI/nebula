@@ -8,8 +8,8 @@
         <div class="container">
             <nav-bar @change-menu-show="changeMenuShow" :is-open-menu="collapse" :breadcrumb-item="breadcrumbData"
                      @menu-style="modifyStyle"/>
-            <div style="height: 95%">
-                <open-tab :open-tab="openTab" :current-tab-prop="currentOpenTab" @close="closeTab"
+            <div style="height: 100%">
+                <open-tab :open-tab="openTab" :current-tab-prop="currentOpenTab" @close-tab="closeTab"
                           @before-close="beforeClose"/>
             </div>
         </div>
@@ -35,7 +35,7 @@ export default {
     setup() {
         const collapse = ref(false);
         const menuData = ref([{
-            menuName: "首页",
+            menuTitle: "首页",
             id: 0,
             routerPath: "/index",
             menuIcon: "layui-icon-home"
@@ -44,7 +44,7 @@ export default {
         const currentOpenTab = ref(0)
         const openTab = ref([
             {
-                menuName: "首页",
+                menuTitle: "首页",
                 id: 0,
                 routerPath: "/index",
                 closable: false
@@ -80,7 +80,7 @@ export default {
 
         function loadBreadcrumb() {
             if (route.path === '/index') {
-                breadcrumbData.value = [{menuName: '主页', routerPath: '/index'}]
+                breadcrumbData.value = [{menuTitle: '主页', routerPath: '/index'}]
             } else {
                 let param = {routerPath: route.path}
                 getPageBreadcrumb(param).then(res => {
@@ -94,7 +94,7 @@ export default {
             if (openTab.value.find(item => item.id === currentTab.id)) {
                 currentOpenTab.value = currentTab.id
             } else {
-                const newTab = {id: currentTab.id, menuName: currentTab.menuName, routerPath: currentTab.routerPath}
+                const newTab = {id: currentTab.id, menuTitle: currentTab.menuTitle, routerPath: currentTab.routerPath,closable:true}
                 openTab.value.push(newTab)
                 currentOpenTab.value = currentTab.id
             }
@@ -106,7 +106,7 @@ export default {
             }
             if (route.path !== '/index' || route.path !== '/') {
                 let param = {
-                    menuName: route.name,
+                    menuTitle: route.meta.menuTitle,
                     routerPath: route.path
                 }
                 getMenuInfo(param).then(res => {
@@ -116,8 +116,9 @@ export default {
                         } else {
                             const newTab = {
                                 id: res.data.id,
-                                menuName: res.data.menuName,
-                                routerPath: res.data.routerPath
+                                menuTitle: res.data.menuTitle,
+                                routerPath: res.data.routerPath,
+                                closable:true
                             }
                             openTab.value.push(newTab)
                             currentOpenTab.value = res.data.id
@@ -126,7 +127,7 @@ export default {
                         if (openTab.value.find(item => item.id === route.path)) {
                             currentOpenTab.value = route.path
                         } else {
-                            const newTab = {id: route.path, menuName: route.name, routerPath: route.path}
+                            const newTab = {id: route.path, menuTitle: route.meta.menuTitle, routerPath: route.path,closable:true}
                             openTab.value.push(newTab)
                             currentOpenTab.value = route.path
                         }
@@ -136,9 +137,15 @@ export default {
         }
 
         function closeTab(id) {
-            let filter = openTab.value.filter(tab => tab.id === id);
+            let filter = openTab.value.filter(tab=>tab.id===id)[0]
             let number = openTab.value.indexOf(filter);
-            openTab.value.splice(number)
+            if (currentOpenTab.value===id) {
+                currentOpenTab.value = openTab.value[number - 1].id
+                router.push(openTab.value[number - 1].routerPath)
+            }
+            openTab.value = openTab.value.filter(tab => tab.id !== id);
+            console.log("id:"+number)
+            // openTab.value.splice(number)
             // openTab.value = openTab.value.filter(tab => tab.id !== id);
         }
 

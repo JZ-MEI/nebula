@@ -41,7 +41,6 @@
                 <lay-button type="primary" size="xs" @click="handleEdit(row)">编辑</lay-button>
                 <lay-button type="normal" size="xs" @click="modifyPassword(row)">修改密码</lay-button>
                 <lay-button type="danger" size="xs" @click="handleDelete(row)">删除</lay-button>
-
             </template>
         </lay-table>
         <lay-layer v-model="isShow" title="新增用户" :btn="action">
@@ -106,6 +105,7 @@ import DictTag from "@/component/DictTag.vue";
 import {layer} from "@layui/layui-vue";
 
 export default {
+    name:'sysUser',
     components: {DictTag},
     dicts: ["default_sex"],
     setup() {
@@ -163,12 +163,6 @@ export default {
                             layer.notifiy({
                                 title: "操作成功",
                                 icon: 1
-                            })
-                        } else {
-                            layer.notifiy({
-                                title: "创建失败",
-                                content: res.msg,
-                                icon: 2
                             })
                         }
                     })

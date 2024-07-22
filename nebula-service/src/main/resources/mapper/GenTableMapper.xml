@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nebula.service.mapper.GenTableMapper">
+
+    <select id="getTableName" resultType="com.nebula.service.domain.gen.TableInfo">
+        SELECT TABLE_NAME,TABLE_COMMENT
+        FROM information_schema.TABLES
+        WHERE TABLE_SCHEMA = 'nebula'
+        ORDER BY TABLE_SCHEMA, TABLE_TYPE
+    </select>
+    <select id="getTableColumnsList" resultType="com.nebula.service.domain.gen.TableColumsInfo">
+        select table_name, column_name, is_nullable, column_default, column_type, column_key,column_comment
+        from information_schema.COLUMNS
+        where table_schema = #{tableSchema}
+          and table_name = #{tableName}
+    </select>
+</mapper>

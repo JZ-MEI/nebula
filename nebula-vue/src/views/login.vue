@@ -38,7 +38,7 @@ export default {
         const userInfo = ref({
             username: '',
             password: '',
-            rememberMe:false
+            rememberMe:true
         })
 
         const router = useRouter();

@@ -62,4 +62,8 @@ public class BaseResult<T> {
     public static <T> BaseResult<T> error() {
         return error(null, null);
     }
+
+    public boolean isSuccess(){
+        return code == HttpStatus.HTTP_OK;
+    }
 }

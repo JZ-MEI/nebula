@@ -18,4 +18,6 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
     List<SysMenu> getMenuTableData(SysMenu sysMenu);
 
     SysMenu getMenuInfo(SysMenu sysMenu);
+
+    List<String> getAllMenuPermission();
 }

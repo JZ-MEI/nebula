@@ -23,7 +23,7 @@
         <lay-table :columns="columns" :data-source="tableData"
                    :default-toolbar="true" :default-expand-all="false" @change="changePage" :page="page">
             <template v-slot:toolbar>
-                <lay-button type="primary" @click="handleCreate" size="sm">新增</lay-button>
+                <lay-button type="primary" @click="handleCreate" size="sm" v-permission="'role.add'">新增</lay-button>
             </template>
             <template v-slot:roleName="{row}">
                 <router-link :to=genDetailUrl(row) class="table-link">
@@ -91,6 +91,7 @@ import {layer} from "@layui/layui-vue";
 import {getMenuList} from "@/api/sysMenu.js";
 
 export default {
+    name:'sysRole',
     setup() {
         const queryParam = ref({
             roleName: null,
@@ -168,7 +169,7 @@ export default {
         const currentRoleId = ref()
         const replaceFields = ref({
             id: 'id',
-            title: "menuName",
+            title: "menuTitle",
             children: "sysMenuList"
 
         })
@@ -324,7 +325,11 @@ export default {
         }
 
         function getMenuData() {
-            getMenuList().then(res => {
+            let typeList = [1,2,3]
+            let param = {
+                typeList: typeList.join(',')
+            }
+            getMenuList(param).then(res => {
                 menuData.value = res.data
             })
         }
