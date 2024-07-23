@@ -1,0 +1,12 @@
+package ${packageName}.service;
+
+import ${packageName}.domain.${className};
+
+import java.util.List;
+
+public interface ${className}Service {
+
+    List<${className}> get${className}List(${className} ${classVariableName});
+
+    int createOrUpdate${className}(${className} ${classVariableName});
+}

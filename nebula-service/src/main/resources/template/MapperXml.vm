@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${packageName}.mapper.${className}Mapper">
+
+    <select id="get${className}List" resultType="${packageName}.domain.${className}">
+        select
+            *
+        from ${tableName}
+        <where>
+        #foreach($column in $columns)
+            #if($column.columnName != 'isDeleted')
+            #if($column.columnType=="String")
+            <if test="${column.columnName} != null and ${column.columnName} != ''">and ${column.camelColumnName}=#{${column.columnName}}</if>
+            #else
+            <if test="${column.columnName} != null">and ${column.camelColumnName}=#{${column.columnName}}</if>
+            #end
+            #else
+            and is_deleted = 0
+            #end
+        #end
+        </where>
+    </select>
+</mapper>

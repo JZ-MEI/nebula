@@ -1,0 +1,23 @@
+package ${packageName}.domain;
+
+import com.nebula.common.entity.PageDomain;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class $className extends PageDomain{
+#foreach ($column in $columns)
+
+    /**
+     * $column.columnComment
+     */
+    #if($column.extra=="auto_increment")
+    @TableId(type = IdType.AUTO)
+    #end
+    #if($column.columnType=="Date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    #end
+    private $column.columnType $column.camelColumnName;
+#end
+}

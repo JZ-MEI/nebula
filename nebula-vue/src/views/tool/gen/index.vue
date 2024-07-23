@@ -22,18 +22,57 @@
                     :default-toolbar="true"
                 >
                     <template v-slot:toolbar>
-                        <lay-button type="primary" size="xs" @click="genCode">生成</lay-button>
+                        <lay-button type="primary" size="xs" @click="openPackage">生成</lay-button>
                     </template>
                 </lay-table>
             </lay-col>
         </lay-row>
+        <lay-layer v-model="packageNameLayer" :btn="action">
+            <div class="view-container">
+                <lay-form label-width="40px">
+                    <lay-form-item label="包名">
+                        <lay-input v-model="genCodeParam.packageName" placeholder="请输入包名"/>
+                    </lay-form-item>
+                </lay-form>
+            </div>
+        </lay-layer>
+        <lay-layer v-model="codeLayer" :area="['80vw', '80vh']">
+            <lay-row :space="15" style="height: calc(80vh - 57px);margin: 0">
+                <lay-col :md="6" style="margin: 0;height: 100%;padding: 0">
+                    <div style="height: 30px;padding: 8px 15px">
+                        <lay-button type="primary" size="xs" @click="downloadCode">下载</lay-button>
+                    </div>
+                    <div style="height: calc(100% - 30px)">
+                        <lay-scroll height="100%" style="background-color: #fff" thumbColor="#c9c9c9">
+                            <div class="file-list">
+                                <ul>
+                                    <li v-for="(item,index) in fileNameList" :key="index"
+                                        :class="{ 'file-name': currentFile!== item, 'file-name-select': currentFile === item }"
+                                        @click="changeFile(item)">
+                                        {{ item }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </lay-scroll>
+                    </div>
+                </lay-col>
+                <lay-col :md="18" style="margin: 0;height: 100%;padding: 0">
+                    <code-preview :value="codeValue" :language="currentFile==='mapperXml'?'xml':'java'"
+                                  theme="vs-dark"></code-preview>
+                </lay-col>
+            </lay-row>
+        </lay-layer>
     </div>
 </template>
 <script>
 import {onMounted} from "vue";
-import {genDomain, getTableColumns, getTableName} from "@/api/gen.js";
+import { downloadGenCode, genDomain, getTableColumns, getTableName} from "@/api/gen.js";
+import CodePreview from "@/component/CodePreview.vue";
+import {layer} from "@layui/layui-vue";
+import DownloadUtil from "@/util/downloadUtil.js";
 
 export default {
+    components: {CodePreview},
     setup() {
 
         const columns = [
@@ -61,6 +100,9 @@ export default {
         const rowTableData = ref([])
 
         const currentTable = ref("");
+
+        const currentFile = ref("")
+
         function doubleClick(row) {
             currentTable.value = row.tableName
             let param = {
@@ -70,11 +112,66 @@ export default {
                 rowTableData.value = res.data
             })
         }
-        function genCode(){
-            let param={
-                tableName:currentTable.value
+
+        const genCodeParam = ref({
+            tableName: '',
+            packageName: ''
+        })
+
+        const codeValue = ref("hello world")
+
+        const packageNameLayer = ref(false)
+
+        function openPackage() {
+            if (currentTable.value) {
+                packageNameLayer.value = true
+                genCodeParam.value.tableName = currentTable.value
+            } else {
+                layer.msg("请选择表后生成", {icon: 2, time: 1000})
             }
-            genDomain(param);
+        }
+
+        const action = ref([
+            {
+                text: "确认",
+                callback: () => {
+                    if (genCodeParam.value.packageName) {
+                        genCode()
+                        packageNameLayer.value = false
+                    } else {
+                        layer.msg("请输入包名", {icon: 2, time: 1000})
+                    }
+                }
+            },
+            {
+                text: "取消",
+                callback: () => {
+                    packageNameLayer.value = false
+                }
+            }
+        ])
+        const genCodeResult = ref({})
+        const codeLayer = ref(false)
+
+        const fileNameList = ref([])
+
+        function genCode() {
+            genDomain(genCodeParam.value).then(res => {
+                genCodeResult.value = res.data
+                fileNameList.value = Object.keys(genCodeResult.value);
+                codeLayer.value = true
+                currentFile.value = fileNameList.value[0]
+                codeValue.value = genCodeResult.value[currentFile.value]
+            });
+        }
+
+        function changeFile(item) {
+            currentFile.value = item
+            codeValue.value = genCodeResult.value[item]
+        }
+
+        function downloadCode(){
+            DownloadUtil.download("/gen/downloadCode",'code.zip',genCodeParam.value)
         }
 
         onMounted(() => {
@@ -87,8 +184,39 @@ export default {
             doubleClick,
             rowColumns,
             rowTableData,
-            genCode
+            genCode,
+            genCodeParam,
+            packageNameLayer,
+            openPackage,
+            action,
+            codeLayer,
+            genCodeResult,
+            fileNameList,
+            currentFile,
+            changeFile,
+            codeValue,
+            downloadCode,
         }
     }
 }
 </script>
+<style>
+.file-list {
+    padding: 15px;
+}
+
+.file-name {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.file-name:hover {
+    background-color: #eeeeee;
+}
+
+.file-name-select {
+    padding: 5px;
+    cursor: pointer;
+    background-color: rgba(22, 183, 119, 0.2);
+}
+</style>

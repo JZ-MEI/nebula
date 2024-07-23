@@ -1,0 +1,35 @@
+package ${packageName}.service.impl;
+
+import ${packageName}.common.util.AdminUtil;
+import ${packageName}.domain.${className};
+import ${packageName}.mapper.${className}Mapper;
+import ${packageName}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+
+    @Autowired
+    ${className}Mapper ${classVariableName}Mapper;
+
+    @Override
+    public List<${className}> get${className}List(${className} ${classVariableName}) {
+        return ${classVariableName}Mapper.get${className}List(${classVariableName});
+    }
+
+    @Override
+    public int createOrUpdate${className}(${className} ${classVariableName}) {
+        if (${classVariableName}.getId()!=null){
+            ${classVariableName}.setUpdateTime(new Date());
+            ${classVariableName}.setUpdateBy(AdminUtil.getLoginId());
+            return ${classVariableName}Mapper.updateById(${classVariableName});
+        }
+        ${classVariableName}.setCreateTime(new Date());
+        ${classVariableName}.setCreateBy(AdminUtil.getLoginId());
+        return ${classVariableName}Mapper.insert(${classVariableName});
+    }
+}

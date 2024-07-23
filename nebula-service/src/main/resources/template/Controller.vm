@@ -1,0 +1,32 @@
+package ${packageName}.controller;
+
+import ${packageName}.common.common.BaseResult;
+import ${packageName}.common.entity.TableDataInfo;
+import ${packageName}.common.util.BaseController;
+import ${packageName}.common.util.PageUtil;
+import ${packageName}.domain.${className};
+import ${packageName}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/${classVariableName}")
+public class ${className}Controller extends BaseController {
+    @Autowired
+    ${className}Service ${classVariableName}Service;
+
+    #set($TableClassName="TableDataInfo")
+    @GetMapping("get${className}TableData")
+    public BaseResult<${TableClassName}<${className}>> get${className}TableData(${className} ${classVariableName}) {
+        PageUtil.startPage(${classVariableName});
+        List<${className}> ${classVariableName}List = ${classVariableName}Service.get${className}List(${classVariableName});
+        return BaseResult.success(PageUtil.getTableData(${classVariableName}List));
+    }
+
+    @PostMapping("createOrUpdate${className}")
+    public BaseResult<?> createOrUpdate${className}(@RequestBody ${className} ${classVariableName}){
+        return toResult(${classVariableName}Service.createOrUpdate${className}(${classVariableName}));
+    }
+}

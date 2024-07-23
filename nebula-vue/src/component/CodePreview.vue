@@ -45,6 +45,20 @@ export default {
             }
         });
 
+        // 监听 value 属性的变化
+        watch(() => props.value, (newValue) => {
+            if (editorInstance) {
+                editorInstance.setValue(newValue);
+            }
+        });
+
+        // 监听 language 属性的变化
+        watch(() => props.language, (newLanguage) => {
+            if (editorInstance) {
+                editorInstance.setModelLanguage(editorInstance.getModel(), newLanguage);
+            }
+        });
+
         return {
             editorContainer,
         };
@@ -54,7 +68,7 @@ export default {
 
 <style>
 .monaco-editor-container {
-    width: 100%;
+    width: calc(100% - 2px);
     height: 100%;
 }
 </style>

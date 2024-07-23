@@ -9,7 +9,7 @@
         ORDER BY TABLE_SCHEMA, TABLE_TYPE
     </select>
     <select id="getTableColumnsList" resultType="com.nebula.service.domain.gen.TableColumsInfo">
-        select table_name, column_name, is_nullable, column_default, column_type, column_key,column_comment
+        select table_name,column_name,is_nullable,column_default,data_type,column_type,column_key,column_comment,extra
         from information_schema.COLUMNS
         where table_schema = #{tableSchema}
           and table_name = #{tableName}

@@ -12,10 +12,9 @@ import java.util.List;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
+
     @Autowired
     SysRoleMapper sysRoleMapper;
-
-
 
     @Override
     public List<SysRole> getRoleList(SysRole sysRole) {

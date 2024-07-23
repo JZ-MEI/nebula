@@ -11,7 +11,10 @@ public class TableColumsInfo extends PageDomain {
     private String columnName;
     private String isNullable;
     private String columnDefault;
+    private String dataType;
     private String columnType;
     private String columnKey;
     private String columnComment;
+    private String extra;
+    private String camelColumnName;
 }
