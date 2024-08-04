@@ -2,7 +2,6 @@ package com.nebula.controller.system;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
-import com.nebula.common.annotation.Authorization;
 import com.nebula.common.common.BaseResult;
 import com.nebula.common.entity.TableDataInfo;
 import com.nebula.common.util.BaseController;
@@ -39,7 +38,6 @@ public class SysDeptController extends BaseController {
         return BaseResult.success(PageUtil.getTableData(rootDeptList));
     }
 
-    @Authorization("test2")
     @PostMapping("createOrEditDeptInfo")
     public BaseResult<?> createOrEditDeptInfo(@RequestBody SysDept sysDept){
         return toResult(sysDeptService.createOrUpdateDeptInfo(sysDept));
