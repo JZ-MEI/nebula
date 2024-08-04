@@ -19,9 +19,9 @@ public class SysDictData extends PageDomain {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
     private Integer typeId;
-    private Integer dictKey;
+    private String dictKey;
     private String dictValue;
-    private Integer useTag;
+    private String useTag;
     private String tagType;
     private Integer createBy;
     private Integer updateBy;

@@ -59,7 +59,7 @@
                                 </lay-select>
                             </lay-form-item>
                         </lay-col>
-                        <lay-col md="8" sm="20" v-if="createParam.useTag===1">
+                        <lay-col md="8" sm="20" v-if="createParam.useTag==='1'">
                             <lay-form-item label="标签类型" prop="tagType">
                                 <lay-select v-model="createParam.tagType" placeholder="请选择" class="width-control">
                                     <lay-select-option value="primary" label="primary"></lay-select-option>
@@ -69,7 +69,7 @@
                                 </lay-select>
                             </lay-form-item>
                         </lay-col>
-                        <lay-col md="4" sm="4" v-if="createParam.useTag===1">
+                        <lay-col md="4" sm="4" v-if="createParam.useTag==='1'">
                             <div style="line-height: 38px">
                                 <lay-tag :type="createParam.tagType" variant="light">{{ createParam.dictValue }}</lay-tag>
                             </div>
@@ -115,7 +115,7 @@ export default {
             typeId: route.params.dictId,
             dictKey: null,
             dictValue: null,
-            useTag: 0,
+            useTag: '0',
             tagType: null,
             remark: null,
         })

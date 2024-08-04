@@ -1,11 +1,11 @@
-package com.nebula.task;
+package com.nebula.task.task;
 
 import com.nebula.task.annotation.NebulaJob;
 import com.nebula.common.common.BaseResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class test {
+public class ExampleTask {
 
     @NebulaJob(jobName = "alias1")
     public BaseResult<?> alias1(){

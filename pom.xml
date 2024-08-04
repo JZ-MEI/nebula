@@ -30,6 +30,7 @@
         <quartz.version>2.3.2</quartz.version>
         <common-pool.version>2.11.1</common-pool.version>
         <velocity.version>2.3</velocity.version>
+        <qdox.version>2.0-M9</qdox.version>
     </properties>
 
     <dependencyManagement>
@@ -162,6 +163,11 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.qdox</groupId>
+                <artifactId>qdox</artifactId>
+                <version>${qdox.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

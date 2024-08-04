@@ -24,6 +24,13 @@
                     <template v-slot:toolbar>
                         <lay-button type="primary" size="xs" @click="openPackage">生成</lay-button>
                     </template>
+
+                    <template v-slot:isNullable="{row}">
+                        <dict-tag :options="dictValue.field_nullable" :values="row.isNullable"></dict-tag>
+                    </template>
+                    <template v-slot:columnKey="{row}">
+                        <dict-tag :options="dictValue.filed_key" :values="row.columnKey"></dict-tag>
+                    </template>
                 </lay-table>
             </lay-col>
         </lay-row>
@@ -66,15 +73,19 @@
 </template>
 <script>
 import {onMounted} from "vue";
-import { downloadGenCode, genDomain, getTableColumns, getTableName} from "@/api/gen.js";
+import { genDomain, getTableColumns, getTableName} from "@/api/gen.js";
 import CodePreview from "@/component/CodePreview.vue";
 import {layer} from "@layui/layui-vue";
 import DownloadUtil from "@/util/downloadUtil.js";
+import {getDict} from "@/util/dict.js";
+import DictTag from "@/component/DictTag.vue";
 
 export default {
-    components: {CodePreview},
+    dicts: ["field_nullable","filed_key"],
+    components: {DictTag, CodePreview},
     setup() {
-
+        const proxy = getCurrentInstance();
+        const dictValue = ref({})
         const columns = [
             {title: "表名", key: "tableName", align: 'center'},
             {title: "注释", key: "tableComment", align: 'center'},
@@ -91,10 +102,10 @@ export default {
             {title: "表名", key: "tableName", align: 'center'},
             {title: "列名", key: "columnName", align: 'center'},
             {title: "注释", key: "columnComment", align: 'center'},
-            {title: "可空", key: "isNullable", align: 'center'},
+            {title: "可空", key: "isNullable", align: 'center',customSlot:'isNullable'},
             {title: "默认值", key: "columnDefault", align: 'center'},
             {title: "列类型", key: "columnType", align: 'center'},
-            {title: "键", key: "columnKey", align: 'center'},
+            {title: "键", key: "columnKey", align: 'center',customSlot: 'columnKey'},
         ]
 
         const rowTableData = ref([])
@@ -176,6 +187,8 @@ export default {
 
         onMounted(() => {
             getTableList()
+            dictValue.value = getDict(proxy)
+
         })
 
         return {
@@ -196,6 +209,7 @@ export default {
             changeFile,
             codeValue,
             downloadCode,
+            dictValue
         }
     }
 }

@@ -22,11 +22,3 @@ export function genDomain(data){
         data:data
     })
 }
-
-export function downloadGenCode(data){
-    return request({
-        url:'/gen/downloadCode',
-        method:"get",
-        data:data
-    })
-}

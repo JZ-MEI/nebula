@@ -13,5 +13,6 @@
         from information_schema.COLUMNS
         where table_schema = #{tableSchema}
           and table_name = #{tableName}
+        order by ordinal_position
     </select>
 </mapper>

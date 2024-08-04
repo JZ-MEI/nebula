@@ -16,6 +16,12 @@ public class CodeGenServiceImpl implements CodeGenService {
     @Autowired
     VelocityEngine velocityEngine;
 
+    /**
+     * 生成代码
+     * @param templateName 模板名称
+     * @param context 正文内容
+     * @return
+     */
     @Override
     public String generateCode(String templateName, VelocityContext context) {
         return null;

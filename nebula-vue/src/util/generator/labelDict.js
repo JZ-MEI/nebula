@@ -57,5 +57,6 @@ export const labelMapping = {
     loading:"加载",
     decollator:"分隔符号",
     onlyLastLevel:"只显示最后一级",
-    skin:"皮肤"
+    skin:"皮肤",
+    options:"选项"
 };
