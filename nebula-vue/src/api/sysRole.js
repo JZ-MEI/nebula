@@ -2,7 +2,7 @@ import {request} from "@/util/request.js";
 
 export function getRoleList(param){
     return request({
-        url:"sysRole/getRoleList",
+        url:"/sysRole/getRoleList",
         method:"get",
         params:param
     })
@@ -10,7 +10,7 @@ export function getRoleList(param){
 
 export function createOrUpdateSysRole(data){
     return request({
-        url:'sysRole/createOrUpdateSysRole',
+        url:'/sysRole/createOrUpdateSysRole',
         method:"post",
         data:data
     })
@@ -18,7 +18,7 @@ export function createOrUpdateSysRole(data){
 
 export function getRoleMenuList(param){
     return request({
-        url:"sysRole/getRoleMenuList",
+        url:"/sysRole/getRoleMenuList",
         method:"get",
         params:param
     })
@@ -26,7 +26,7 @@ export function getRoleMenuList(param){
 
 export function commitAuth(data){
     return request({
-        url:"sysRole/authorization",
+        url:"/sysRole/authorization",
         method:"post",
         data:data
     })
@@ -34,7 +34,7 @@ export function commitAuth(data){
 
 export function getRoleUserTableData(param){
     return request({
-        url:"sysRole/getRoleUserTableData",
+        url:"/sysRole/getRoleUserTableData",
         method:"get",
         params:param
     })
@@ -42,7 +42,7 @@ export function getRoleUserTableData(param){
 
 export function createOrDeleteRoleUser(data){
     return request({
-        url:'sysRole/createOrDeleteRoleUser',
+        url:'/sysRole/createOrDeleteRoleUser',
         method:"post",
         data:data
     })
@@ -50,7 +50,7 @@ export function createOrDeleteRoleUser(data){
 
 export function getUserRoleList(){
     return request({
-        url:'sysRole/getUserRoleList',
+        url:'/sysRole/getUserRoleList',
         method:'get'
     })
 }

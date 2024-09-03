@@ -160,7 +160,7 @@ export default {
                         if (res.code === 200) {
                             isShow.value = false
                             handleQuery()
-                            layer.notifiy({
+                            layer.notify({
                                 title: "操作成功",
                                 icon: 1
                             })
@@ -187,12 +187,12 @@ export default {
                         if (res.code === 200) {
                             showPwd.value = false
                             handleQuery()
-                            layer.notifiy({
+                            layer.notify({
                                 title: "操作成功",
                                 icon: 1
                             })
                         } else {
-                            layer.notifiy({
+                            layer.notify({
                                 title: "创建失败",
                                 content: res.msg,
                                 icon: 2
@@ -260,12 +260,12 @@ export default {
             createOrEditUserInfo(row).then(res => {
                 if (res.code === 200) {
                     handleQuery()
-                    layer.notifiy({
+                    layer.notify({
                         title: "操作成功",
                         icon: 1
                     })
                 } else {
-                    layer.notifiy({
+                    layer.notify({
                         title: "创建失败",
                         content: res.msg,
                         icon: 2
@@ -286,12 +286,12 @@ export default {
                                     if (res.code === 200) {
                                         isShow.value = false
                                         handleQuery()
-                                        layer.notifiy({
+                                        layer.notify({
                                             title: "操作成功",
                                             icon: 1
                                         })
                                     } else {
-                                        layer.notifiy({
+                                        layer.notify({
                                             title: "创建失败",
                                             content: res.msg,
                                             icon: 2

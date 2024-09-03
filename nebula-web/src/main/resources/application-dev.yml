@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/nebula?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&characterEncoding=utf8
-    username: root
+    username: meijinzhi
     password: meijinzhi159.
     type: com.alibaba.druid.pool.DruidDataSource
     drive-class-name: com.mysql.cj.jdbc.Driver

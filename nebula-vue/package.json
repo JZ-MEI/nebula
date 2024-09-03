@@ -15,6 +15,7 @@
     "file-saver": "^2.0.5",
     "js-cookie": "^3.0.5",
     "monaco-editor": "^0.50.0",
+    "vite-plugin-top-level-await": "^1.4.2",
     "vue": "^3.3.11",
     "vue-cropper": "^0.6.5",
     "vue-router": "4.1.4",

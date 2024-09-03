@@ -17,7 +17,7 @@ export function getInitDict(){
 
 export function getDictData(param){
     return request({
-        url:"sysDict/getDictData",
+        url:"/sysDict/getDictData",
         method:'get',
         params:param
     })
@@ -25,7 +25,7 @@ export function getDictData(param){
 
 export function deleteDictType(data){
     return request({
-        url:"sysDict/deleteDictType",
+        url:"/sysDict/deleteDictType",
         method:'post',
         data:data
 
@@ -34,7 +34,7 @@ export function deleteDictType(data){
 
 export function createOrEditDictType(data){
     return request({
-        url:'sysDict/createOrEditDictType',
+        url:'/sysDict/createOrEditDictType',
         method:'post',
         data:data
     })
@@ -42,7 +42,7 @@ export function createOrEditDictType(data){
 
 export function createOrEditDictData(data){
     return request({
-        url:"sysDict/createOrEditDictData",
+        url:"/sysDict/createOrEditDictData",
         method:'post',
         data:data
     })
@@ -50,7 +50,7 @@ export function createOrEditDictData(data){
 
 export function deleteDictData(data){
     return request({
-        url:"sysDict/deleteDictData",
+        url:"/sysDict/deleteDictData",
         method:'post',
         data:data
     })

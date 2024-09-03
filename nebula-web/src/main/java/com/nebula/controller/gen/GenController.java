@@ -4,7 +4,6 @@ import com.nebula.common.common.BaseResult;
 import com.nebula.common.util.BaseController;
 import com.nebula.service.domain.gen.TableColumsInfo;
 import com.nebula.service.domain.gen.TableInfo;
-import com.nebula.service.service.CodeGenService;
 import com.nebula.service.service.GenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +19,6 @@ public class GenController extends BaseController {
 
     @Autowired
     GenService genService;
-    @Autowired
-    CodeGenService codeGenService;
 
     /**
      * 获取所有的表名

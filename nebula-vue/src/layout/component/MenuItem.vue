@@ -35,10 +35,9 @@ export default {
         const router = useRouter()
 
         function openItem(item) {
-            console.log(item)
             if (item.isThird===0) {
                 emit("current-tab", item)
-                router.push(item.routerPath)
+                let promise = router.push(item.routerPath);
                 if (item.routerPath === "/index") {
                     emit("breadcrumb", [{menuTitle: '主页', routerPath: '/index'}])
                 } else {

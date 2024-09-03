@@ -144,7 +144,6 @@ export default {
                 router.push(openTab.value[number - 1].routerPath)
             }
             openTab.value = openTab.value.filter(tab => tab.id !== id);
-            console.log("id:"+number)
             // openTab.value.splice(number)
             // openTab.value = openTab.value.filter(tab => tab.id !== id);
         }

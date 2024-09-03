@@ -18,16 +18,11 @@ public class TaskScheduler {
     public void initTask(List<TaskDomain> taskList) throws Exception {
         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
         scheduler.start();
-
-        // 假设从数据库中获取任务列表
-
         for (TaskDomain task : taskList) {
 
             Class<?> methodClass = task.getMethod().getDeclaringClass();
             Method method = task.getMethod();
             Object instance = methodClass.getDeclaredConstructor().newInstance();
-
-
 
             Map<String,Object> map = new HashMap<>();
             map.put("method", method);

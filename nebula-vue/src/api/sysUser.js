@@ -2,7 +2,7 @@ import {request} from "@/util/request.js";
 
 export function getUserTableData(param){
     return request({
-        url:"sysUser/getUserTableData",
+        url:"/sysUser/getUserTableData",
         method:'get',
         params:param
     })
@@ -10,7 +10,7 @@ export function getUserTableData(param){
 
 export function createOrEditUserInfo(data){
     return request({
-        url:"sysUser/createOrEditUserInfo",
+        url:"/sysUser/createOrEditUserInfo",
         method:'post',
         data:data
     })
@@ -18,7 +18,7 @@ export function createOrEditUserInfo(data){
 
 export function modifyPwd(data){
     return request({
-        url:"sysUser/modifyPwd",
+        url:"/sysUser/modifyPwd",
         method:"post",
         data:data
     })
@@ -26,21 +26,21 @@ export function modifyPwd(data){
 
 export function getNormalUser(){
     return request({
-        url: "sysUser/getNormalUser",
+        url: "/sysUser/getNormalUser",
         method:'get'
     })
 }
 
 export function getPersonalInfo(){
     return request({
-        url:"sysUser/getPersonalInfo",
+        url:"/sysUser/getPersonalInfo",
         method:'get'
     })
 }
 
 export function modifyPersonalInfo(data){
     return request({
-        url:"sysUser/modifyPersonalInfo",
+        url:"/sysUser/modifyPersonalInfo",
         method:'post',
         data:data
     })
@@ -48,7 +48,7 @@ export function modifyPersonalInfo(data){
 
 export function modifyPassword(data){
     return request({
-        url:"sysUser/modifyPassword",
+        url:"/sysUser/modifyPassword",
         method:'post',
         data:data
     })

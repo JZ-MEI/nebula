@@ -84,7 +84,7 @@ export default {
             offline(row.loginId).then(res=>{
                 if (res.code===200){
                     handleQuery()
-                    layer.notifiy({
+                    layer.notify({
                         title: "操作成功",
                         icon: 1
                     })

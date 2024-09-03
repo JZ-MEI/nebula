@@ -143,7 +143,7 @@ export default {
             }
             modifyPersonalInfo(param).then(res=>{
                 if (res.code===200){
-                    layer.notifiy({
+                    layer.notify({
                         title: "保存成功",
                         icon: 1
                     })
@@ -155,7 +155,7 @@ export default {
         function modifyPersonal(){
             modifyPersonalInfo(userInfo.value).then(res=>{
                 if (res.code===200){
-                    layer.notifiy({
+                    layer.notify({
                         title: "保存成功",
                         icon: 1
                     })
@@ -169,7 +169,7 @@ export default {
                 if (isValidate){
                   modifyPassword(pwdInfo.value).then(res=>{
                     if(res.code===200){
-                      layer.notifiy({
+                      layer.notify({
                         title: "保存成功",
                         icon: 1
                       })

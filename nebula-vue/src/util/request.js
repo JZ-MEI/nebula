@@ -48,7 +48,7 @@ export async function request({ url, method = 'get', data = null, params = null 
             ...options
         });
         if(response.data.code !== 200){
-            layer.notifiy({
+            layer.notify({
                 title: "操作失败",
                 content: response.data.msg,
                 icon: 2

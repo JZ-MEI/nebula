@@ -118,7 +118,7 @@ export default {
         function userLogout() {
             logout().then(res => {
                 if (res.code === 200) {
-                    layer.notifiy({
+                    layer.notify({
                         title: "退出成功",
                         icon: 1
                     })

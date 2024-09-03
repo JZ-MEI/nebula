@@ -20,7 +20,6 @@ export default {
 </script>
 <style>
 .menuTopLogo {
-    //background-color: #393d49;
     background-color: v-bind(bgColor);
     height: 45px;
     text-align: center;
@@ -32,9 +31,7 @@ export default {
 .topLogoImg {
     height: 36px;
     width: 36px;
-    //margin-top: 7px;
     background-image: url("@/assets/img/favicon.ico");
-    //display: inline-block;
     background-size: cover;
 }
 

@@ -14,10 +14,10 @@ public class GlobalExceptionConfig {
 
 //    NotLoginException
 
-    @ExceptionHandler(NotLoginException.class)
-    public BaseResult<?> handlerNotLoginException(NotLoginException e) {
-        return BaseResult.error("当前访问未登录或登录超时，请登陆后尝试");
-    }
+//    @ExceptionHandler(NotLoginException.class)
+//    public BaseResult<?> handlerNotLoginException(NotLoginException e) {
+//        return BaseResult.error("当前访问未登录或登录超时，请登陆后尝试");
+//    }
 
     @ExceptionHandler(LoginException.class)
     public BaseResult<?> handleLoginException(LoginException e){

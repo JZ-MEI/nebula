@@ -88,7 +88,6 @@ export default {
 }
 
 .tag-row {
-    //border: 1px solid;
     padding: 0 15px;
     height: 40px;
     line-height: 40px;

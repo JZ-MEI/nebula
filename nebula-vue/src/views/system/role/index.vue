@@ -136,12 +136,12 @@ export default {
                         if (res.code === 200) {
                             isShow.value = false
                             handleQuery()
-                            layer.notifiy({
+                            layer.notify({
                                 title: "操作成功",
                                 icon: 1
                             })
                         } else {
-                            layer.notifiy({
+                            layer.notify({
                                 title: "创建失败",
                                 content: res.msg,
                                 icon: 2
@@ -189,12 +189,12 @@ export default {
                     commitAuth(param).then(res=>{
                         if (res.code === 200) {
                             showAuth.value = false
-                            layer.notifiy({
+                            layer.notify({
                                 title: "操作成功",
                                 icon: 1
                             })
                         } else {
-                            layer.notifiy({
+                            layer.notify({
                                 title: "创建失败",
                                 content: res.msg,
                                 icon: 2
@@ -258,12 +258,12 @@ export default {
             createOrUpdateSysRole(changeParam).then(res => {
                 if (res.code === 200) {
                     handleQuery()
-                    layer.notifiy({
+                    layer.notify({
                         title: "操作成功",
                         icon: 1
                     })
                 } else {
-                    layer.notifiy({
+                    layer.notify({
                         title: "创建失败",
                         content: res.msg,
                         icon: 2
@@ -286,12 +286,12 @@ export default {
                                 createOrUpdateSysRole(changeParam).then(res => {
                                     if (res.code === 200) {
                                         handleQuery()
-                                        layer.notifiy({
+                                        layer.notify({
                                             title: "操作成功",
                                             icon: 1
                                         })
                                     } else {
-                                        layer.notifiy({
+                                        layer.notify({
                                             title: "创建失败",
                                             content: res.msg,
                                             icon: 2

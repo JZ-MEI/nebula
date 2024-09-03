@@ -9,4 +9,5 @@ export default {
             el.parentNode && el.parentNode.removeChild(el);
         }
     }
+
 };
