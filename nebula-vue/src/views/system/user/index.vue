@@ -40,7 +40,7 @@
             <template v-slot:operation="{row}">
                 <lay-button type="primary" size="xs" @click="handleEdit(row)">编辑</lay-button>
                 <lay-button type="normal" size="xs" @click="modifyPassword(row)">修改密码</lay-button>
-                <lay-button type="danger" size="xs" @click="handleDelete(row)">删除</lay-button>
+                <lay-button type="danger" size="xs" @click="handleDelete(row)" v-if="row.username !== 'admin'">删除</lay-button>
             </template>
         </lay-table>
         <lay-layer v-model="isShow" title="新增用户" :btn="action">

@@ -62,11 +62,12 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         memoryMap.put("系统总内存",formatMemory(memory.getTotal()));
         memoryMap.put("系统已用内存",formatMemory(memory.getTotal()-memory.getAvailable()));
         memoryMap.put("系统可用内存",formatMemory(memory.getAvailable()));
-        memoryMap.put("系统内存使用率",formatPercentNum(divide.multiply(Convert.toBigDecimal(100)).divide(BigDecimal.ONE,2, RoundingMode.HALF_DOWN)));
-        memoryMap.put("JVM总内存",formatMemory(runtimeInfo.getMaxMemory()));
-        memoryMap.put("JVM已用内存",formatMemory(runtimeInfo.getTotalMemory()));
-        memoryMap.put("JVM可用内存",formatMemory(runtimeInfo.getFreeMemory()));
-        memoryMap.put("JVM内存使用率",formatPercentNum(jvmDivide.multiply(Convert.toBigDecimal(100)).divide(BigDecimal.ONE,2,BigDecimal.ROUND_HALF_DOWN)));
+        memoryMap.put("内存使用率",formatPercentNum(divide.multiply(Convert.toBigDecimal(100)).divide(BigDecimal.ONE,2, RoundingMode.HALF_DOWN)));
+        memoryMap.put("JVM最大内存",formatMemory(runtimeInfo.getMaxMemory()));
+        memoryMap.put("JVM总内存",formatMemory(runtimeInfo.getTotalMemory()));
+        memoryMap.put("JVM已用内存",formatMemory(runtimeInfo.getFreeMemory()));
+        memoryMap.put("JVM可用内存",formatMemory(runtimeInfo.getUsableMemory()));
+//        memoryMap.put("JVM可用内存",formatPercentNum(jvmDivide.multiply(Convert.toBigDecimal(100)).divide(BigDecimal.ONE,2,BigDecimal.ROUND_HALF_DOWN)));
         List<JSONObject> memoryList = new ArrayList<>();
         for (Map.Entry<String,Object> entry:memoryMap.entrySet()){
             JSONObject jsonObject = new JSONObject();
@@ -147,16 +148,23 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         String percentTemplate = "{}%";
         return StrUtil.format(percentTemplate,number);
     }
+    private static final BigDecimal KB = new BigDecimal("1024");
+    private static final BigDecimal MB = new BigDecimal("1048576");
 
+    private static final BigDecimal GB = new BigDecimal("1073741824");
     private String formatMemory(Number number){
-        if (number.longValue()<1024){
-            return StrUtil.format("{}Byte",number);
-        }else if (number.longValue()>= 1024 && number.longValue()<1048576){
-            return StrUtil.format("{}KB",number.longValue()/1024);
-        } else if (number.longValue() >= 1048576 && number.longValue() < 1073741824) {
-            return StrUtil.format("{}MB",number.longValue()/1048576);
+        BigDecimal decimalNum = Convert.toBigDecimal(number);
+        if (decimalNum.compareTo(KB)<0){
+            return StrUtil.format("{}Byte",decimalNum);
+        }else if (decimalNum.compareTo(KB)>= 0 && decimalNum.compareTo(MB)<0){
+            BigDecimal divide = decimalNum.divide(KB, 2, RoundingMode.HALF_UP);
+            return StrUtil.format("{}KB",divide);
+        } else if (decimalNum.compareTo(MB) >= 0 && decimalNum.compareTo(GB)<0) {
+            BigDecimal divide = decimalNum.divide(MB, 2, RoundingMode.HALF_UP);
+            return StrUtil.format("{}MB",divide);
         } else {
-            return StrUtil.format("{}GB",number.longValue()/1073741824);
+            BigDecimal divide = decimalNum.divide(GB, 2, RoundingMode.HALF_UP);
+            return StrUtil.format("{}GB",divide);
         }
     }
 }

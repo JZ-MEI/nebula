@@ -28,7 +28,6 @@ public class SysUserController extends BaseController {
 
     }
 
-    @SaCheckPermission("user.add")
     @PostMapping("createOrEditUserInfo")
     public BaseResult<?> createOrEditUserInfo(@RequestBody SysUserInfo sysUserInfo) {
         return toResult(sysUserInfoService.createOrEditUserInfo(sysUserInfo));

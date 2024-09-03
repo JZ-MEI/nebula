@@ -54,7 +54,7 @@
                             </lay-form-item>
                         </lay-col>
                         <lay-col md="12" sm="24">
-                            <lay-form-item label="CRON表达式" prop="cron">
+                            <lay-form-item label="CRON" prop="cron">
                                 <lay-input v-model="createParam.cron"></lay-input>
                             </lay-form-item>
                         </lay-col>

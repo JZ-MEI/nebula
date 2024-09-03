@@ -118,6 +118,7 @@ public class SysTaskServiceImpl implements SysTaskService {
         if (StrUtil.isNotBlank(taskDomain.getJobParams())) {
             map.put("jobParams", taskDomain.getJobParams());
         }
+        map.put("jobId",sysTask.getId());
         JobDataMap jobDataMap = new JobDataMap(map);
         // 创建 JobDetail，传递方法和实例
         JobDetail jobDetail = JobBuilder.newJob(ReflectiveMethodJob.class)

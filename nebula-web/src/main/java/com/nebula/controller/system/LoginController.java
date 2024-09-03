@@ -2,6 +2,7 @@ package com.nebula.controller.system;
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.useragent.*;
 import com.nebula.common.common.BaseResult;
@@ -42,7 +43,7 @@ public class LoginController {
         session.set("os", os.getName());
         session.setToken(StpUtil.getTokenValue());
         String loginIp = ServletUtil.getClientIP(request);
-        if (session.get("loginIp") != null) {
+        if (session.get("loginIp") != null&& !StrUtil.equals((String)session.get("loginIp"),loginIp)) {
             session.set("loginIp", session.get("loginIp") + "/" + loginIp);
         } else {
             session.set("loginIp", loginIp);
