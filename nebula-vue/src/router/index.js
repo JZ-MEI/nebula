@@ -22,34 +22,40 @@ const staticRoutes = [
 
 const dynamicRoutes = [
     {
-        path: "/system/dict/detail/:dictId(\\d+)",
-        name: 'dictDetail',
-        component: () => import('../views/system/dict/detail'),
-        meta: { menuTitle: '字典详情', keepAlive: false }
-    },
-    {
-        path: "/system/dept/detail/:deptId(\\d+)",
-        name: 'deptDetail',
-        component: () => import('../views/system/dept/detail.vue'),
-        meta: { menuTitle: '部门详情', keepAlive: false }
-    },
-    {
-        path: "/system/role/detail/:roleId(\\d+)",
-        name: 'roleDetail',
-        component: () => import('../views/system/role/detail.vue'),
-        meta: { menuTitle: '角色用户', keepAlive: false }
-    },
-    {
-        path: "/personal/:page(\\w+)",
-        name: 'personalHub',
-        component: () => import('../views/system/user/personalHub.vue'),
-        meta: { keepAlive: false, menuTitle: '个人中心' }
-    },
-    {
-        path: "/monitor/task/detail/:taskId(\\d+)",
-        name: 'execLog',
-        component: () => import('../views/monitor/task/detail.vue'),
-        meta: { menuTitle: '调度日志', keepAlive: false }
+        path:"/",
+        component:Layout,
+        children:[
+            {
+                path: "/system/dict/detail/:dictId(\\d+)",
+                name: 'dictDetail',
+                component: () => import('../views/system/dict/detail'),
+                meta: { menuTitle: '字典详情', keepAlive: false }
+            },
+            {
+                path: "/system/dept/detail/:deptId(\\d+)",
+                name: 'deptDetail',
+                component: () => import('../views/system/dept/detail.vue'),
+                meta: { menuTitle: '部门详情', keepAlive: false }
+            },
+            {
+                path: "/system/role/detail/:roleId(\\d+)",
+                name: 'roleDetail',
+                component: () => import('../views/system/role/detail.vue'),
+                meta: { menuTitle: '角色用户', keepAlive: false }
+            },
+            {
+                path: "/personal/:page(\\w+)",
+                name: 'personalHub',
+                component: () => import('../views/system/user/personalHub.vue'),
+                meta: { keepAlive: false, menuTitle: '个人中心' }
+            },
+            {
+                path: "/monitor/task/detail/:taskId(\\d+)",
+                name: 'execLog',
+                component: () => import('../views/monitor/task/detail.vue'),
+                meta: { menuTitle: '调度日志', keepAlive: false }
+            }
+        ]
     }
 ];
 

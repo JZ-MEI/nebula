@@ -34,7 +34,7 @@
                 </lay-table>
             </lay-col>
         </lay-row>
-        <lay-layer v-model="packageNameLayer" :btn="action">
+        <lay-layer v-model="packageNameLayer" :btn="action" title="包名">
             <div class="view-container">
                 <lay-form label-width="40px">
                     <lay-form-item label="包名">
@@ -43,7 +43,7 @@
                 </lay-form>
             </div>
         </lay-layer>
-        <lay-layer v-model="codeLayer" :area="['80vw', '80vh']">
+        <lay-layer v-model="codeLayer" :area="['80vw', '80vh']" title="代码预览">
             <lay-row :space="15" style="height: calc(80vh - 57px);margin: 0">
                 <lay-col :md="6" style="margin: 0;height: 100%;padding: 0">
                     <div style="height: 30px;padding: 8px 15px">

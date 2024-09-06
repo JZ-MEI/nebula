@@ -281,6 +281,10 @@ export default {
         const ${formAttributes.model} = ref({
             ${model}
         })
+
+        return {
+            ${formAttributes.model}
+        }
     }
 }
 &lt;/script>`;

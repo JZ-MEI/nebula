@@ -24,6 +24,7 @@ import {ref, onMounted, watch} from 'vue';
 import {getLoginState} from "@/api/login.js";
 import {getMenuInfo, getMenuList, getPageBreadcrumb} from "@/api/sysMenu.js";
 import {useRoute, useRouter} from "vue-router";
+import Cookies from "js-cookie";
 
 export default {
     components: {
@@ -38,7 +39,8 @@ export default {
             menuTitle: "首页",
             id: 0,
             routerPath: "/index",
-            menuIcon: "layui-icon-home"
+            menuIcon: "layui-icon-home",
+            isThird:0
         }])
         const breadcrumbData = ref()
         const currentOpenTab = ref(0)
@@ -69,6 +71,11 @@ export default {
                     loadMenuList()
                     loadBreadcrumb()
                 } else {
+                    layer.notify({
+                      title: "当前登录已过期，请重新登录",
+                      icon: 2
+                    })
+                    Cookies.remove('nebula')
                     router.push('/')
                 }
             })
